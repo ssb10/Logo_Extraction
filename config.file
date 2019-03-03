@@ -1,0 +1,3 @@
+# This is a config file 
+[DEFAULT]
+GECKODRIVER_LOCATION = C:\Users\shrey\PycharmProjects\B12_get_logo\geckodriver-v0.24.0-win64\geckodriver
