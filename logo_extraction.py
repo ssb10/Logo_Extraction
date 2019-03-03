@@ -22,7 +22,11 @@ class LogoExtraction:
         options = Options()
         options.headless = True
         options.log.level = 'error'
-        self.driver = webdriver.Firefox(options=options, executable_path=geckodriver_path)
+        try:
+            self.driver = webdriver.Firefox(options=options, executable_path=geckodriver_path)
+        except:
+            print("geckodriver not found! Provide path to geckodriver in config.file")
+            sys.exit(0)
         self.urls = []
 
 
@@ -77,15 +81,13 @@ class LogoExtraction:
 
         while self.urls:
                 # popping elements from front
-                entry = self.urls.pop(0)
+                url = self.urls.pop(0)
 
-                # split is done since input is in format: http://webpage/url, http://logo/url/
-                url = entry.split(",")[0]
                 try:
                     self.driver.get(url)
-                    logging.info("Processing URL: {}" + format(url))
+                    logging.info("Processing URL: {}".format(url))
                 except:
-                    logging.error("Cannot process {} . Invalid URL.".format(url))
+                    logging.error("Cannot process {}. Invalid URL.".format(url))
                     if not self.urls:
                         self.driver.close()
                         #sys.exit(0)
@@ -149,7 +151,7 @@ class LogoExtraction:
         """
         #TODO: Add output file name in config file
         for key, value in images_link.items():
-            with open("output_new.txt", "a") as out_f:
+            with open("output.txt", "a") as out_f:
                 if value is None:
                     out_f.write(key + ",\n")
                 else:
