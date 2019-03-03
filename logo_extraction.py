@@ -149,7 +149,7 @@ class LogoExtraction:
         :type images_link: dict
 
         """
-        #TODO: Add output file name in config file
+        
         for key, value in images_link.items():
             with open("output.txt", "a+") as out_f:
                 if value is None:
@@ -169,5 +169,3 @@ class LogoExtraction:
 if __name__ == '__main__':
     L = LogoExtraction()
     L.fetch_logos(sys.argv[1])
-    #dict_logo_urls = fetch_logos(sys.argv[1])
-    #write_logo_urls_to_file(dict_logo_urls)
