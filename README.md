@@ -16,7 +16,7 @@ Installation instructions can be found [here](https://selenium-python.readthedoc
 
 In general, running the following command in commandline should install selenium successfully. *(Assuming pip is already installed.)*
 
-```shell
+```console
 pip install selenium
 ```
 
@@ -39,16 +39,16 @@ To the run the file:
 1. Open command prompt (The application is tested on anaconda command prompt) and cd to the Logo_Extraction_master directory.
 2. Run the file as follows:
 
-+ For a input file use:
+ + For a input file use:
 
-```shell
+```console
 python logo_extraction.py /path/to/your/input file/your_input_file.txt
 ```
 
-+ For a url use:
+ + For a url use:
 
 
-```shell
+```console
 python logo_extraction.py http://python.org
 ```
 
@@ -63,8 +63,8 @@ For some websites the logo might be just stylized text. In such cases, the logo 
 1. Open command prompt (The application is tested on anaconda command prompt) and cd to the Logo_Extraction_master directory.
 2. Use the command:
 
-```shell
-python -m unittest logo_extraction_test.py
+```console
+python -m unittest -v logo_extraction_test.py
 ```
 
 # Interpreting logs
