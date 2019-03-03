@@ -4,9 +4,11 @@ This program extracts url of website logo given a website's url.
 
 # Getting started
 
-This program will work for Python 3 and above. Git clone or download this repository.
+This program will work for Python 3 and above. Git clone or download this repository. The program is tested for Windows 10, Linux (Ubuntu 16) and Mac OS X. The python version used in all these tests was 3.5 and higher.
 
 ## Prerequistes
+
+Firefox needs to be installed on your machine. 
 
 This program requires you to install [selenium](https://pypi.org/project/selenium/) package.
 Installation instructions can be found [here](https://selenium-python.readthedocs.io/installation.html). 
@@ -20,11 +22,11 @@ pip install selenium
 
 A headless browser is used to fetch webpage content. The program uses firefox driver (It comes by default with the Selenium package)
 The headless browser needs geckodriver which can be found [here](https://github.com/mozilla/geckodriver/releases).
-Based on the machine that you are using download the driver.
+Based on the machine that you are using download the driver. 
 
 ## Config.file
 
-Mention the path of geckodriver.
+The config file is present in the Logo_Extraction_master directory. Mention the path of geckodriver.
 
 
 # Running the script
@@ -34,7 +36,7 @@ Mention the path of geckodriver.
 This file performs the logo extraction task. It accepts the input file or a url from command line.
 
 To the run the file:
-1. Open command prompt (The application is tested on anaconda command prompt) and cd to the Logo_Extraction directory.
+1. Open command prompt (The application is tested on anaconda command prompt) and cd to the Logo_Extraction_master directory.
 2. Run the file as follows:
 
 + For a input file use:
@@ -58,7 +60,7 @@ For some websites the logo might be just stylized text. In such cases, the logo 
 # Running tests
 
 ### logo_extraction_test.py
-1. Open command prompt (The application is tested on anaconda command prompt) and cd to the Logo_Extraction directory.
+1. Open command prompt (The application is tested on anaconda command prompt) and cd to the Logo_Extraction_master directory.
 2. Use the command:
 
 ```shell
