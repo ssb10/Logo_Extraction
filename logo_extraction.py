@@ -3,7 +3,7 @@ from selenium.webdriver.firefox.options import Options
 import requests
 import configparser
 import logging
-import sys
+import sys, os
 
 logging.basicConfig(filename='logo_extraction.log', level=logging.INFO, format='%(asctime)s %(message)s')
 logging.info("\n *** Logo Extraction *** \n")
@@ -16,10 +16,6 @@ try:
 except FileNotFoundError:
     logging.error("File not found. Please place config.file in current working directory")
 
-
-
-urls = []
-
 class LogoExtraction:
 
     def __init__(self):
@@ -27,6 +23,7 @@ class LogoExtraction:
         options.headless = True
         options.log.level = 'error'
         self.driver = webdriver.Firefox(options=options, executable_path=geckodriver_path)
+        self.urls = []
 
 
     def get_url_from_file(self, input_filename):
@@ -45,7 +42,7 @@ class LogoExtraction:
                 else:
                     return urls
         except FileNotFoundError:
-            logging.error("Input file not found.")
+            logging.error("Input file not found")
 
     def get_element_by_xpath(self, driver, element_name):
         """
@@ -73,11 +70,14 @@ class LogoExtraction:
 
         images_count = {'img': 0, 'a': 0, 'div': 0}
 
-        urls = self.get_url_from_file(input_filename)
+        if os.path.exists(input_filename):
+            self.urls = self.get_url_from_file(input_filename)
+        else:
+            self.urls.append(input_filename)
 
-        while urls:
+        while self.urls:
                 # popping elements from front
-                entry = urls.pop(0)
+                entry = self.urls.pop(0)
 
                 # split is done since input is in format: http://webpage/url, http://logo/url/
                 url = entry.split(",")[0]
@@ -86,7 +86,7 @@ class LogoExtraction:
                     logging.info("Processing URL: {}" + format(url))
                 except:
                     logging.error("Cannot process {} . Invalid URL.".format(url))
-                    if not urls:
+                    if not self.urls:
                         self.driver.close()
                         #sys.exit(0)
                     else:
