@@ -6,7 +6,6 @@ import logging
 import sys, os
 
 logging.basicConfig(filename='logo_extraction.log', level=logging.INFO, format='%(asctime)s %(message)s')
-logging.info("\n *** Logo Extraction *** \n")
 logging.info("Reading config.file")
 config = configparser.ConfigParser()
 try:
@@ -77,6 +76,7 @@ class LogoExtraction:
         if os.path.exists(input_filename):
             self.urls = self.get_url_from_file(input_filename)
         else:
+            #could be the case that URL is supplied from cmdline
             self.urls.append(input_filename)
 
         while self.urls:
@@ -143,7 +143,7 @@ class LogoExtraction:
     def write_logo_urls_to_file(self,images_link):
         """
 
-        Writes valid logo links from dictinary returned by fetch_logos to a text file
+        Writes valid logo links from dictionary returned by fetch_logos to a text file
 
         Parameters:
         :type images_link: dict
@@ -151,15 +151,19 @@ class LogoExtraction:
         """
         #TODO: Add output file name in config file
         for key, value in images_link.items():
-            with open("output.txt", "a") as out_f:
+            with open("output.txt", "a+") as out_f:
                 if value is None:
-                    out_f.write(key + ",\n")
+                    out_f.write(key.rstrip() +",")
+                    out_f.write("\n")
                 else:
+                    #check if the obtained URL link exists
                     try:
                         requests.get(value).raise_for_status()
-                        out_f.write(key + "," + value + "\n")
+                        out_f.write(key.rstrip() + "," + value)
+                        out_f.write("\n")
                     except:
-                        out_f.write(key + ",\n")
+                        out_f.write(key.rstrip()  +",")
+                        out_f.write("\n")
                         logging.error("Unable to access logo when accessed through obtained URL.")
 
 if __name__ == '__main__':
