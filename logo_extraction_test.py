@@ -43,8 +43,7 @@ class TestLogoExtraction(unittest.TestCase):
         self.driver.get("http://python.org")
         images = self.L.get_element_by_xpath(self.driver, '//img')
 
-        assert images[0].get_attribute(
-            'src') == 'https://www.python.org/static/img/python-logo.png', "Invalid element fetched!"
+        assert images[0].get_attribute('src') == 'https://www.python.org/static/img/python-logo.png', "Invalid element fetched!"
 
     def test_end_to_end(self):
         """
@@ -66,7 +65,8 @@ class TestLogoExtraction(unittest.TestCase):
         matching_url = [i for i, j in zip(self.input_logo_urls, self.output_logo_urls) if i == j]
         # Comparing the count of obtained logo urls and expected logo urls. The current implementation fetches 28 urls correctly.
         assert len(matching_url) >= 28, "Accuracy of system has reduced"
-        print("Accuracy Report: %.2f" % matching_url/len(self.output_logo_urls))
+        accuracy = (len(matching_url)/45) * 100
+        print("Accuracy Report: {}".format(accuracy))
 
     def tearDown(self):
         self.driver.close()
